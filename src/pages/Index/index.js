@@ -27,7 +27,7 @@ class Index extends React.Component{
                  trigger={null}
                  collapsed={this.state.collapsed}
                  >
-            <SiderNav/>
+            <SiderNav collapsed={this.state.collapsed}/>
           </Sider>
           <Layout>
             <Header style={{background: '#fff', padding: '0 16px'}}>

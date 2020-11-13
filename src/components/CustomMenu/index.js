@@ -7,7 +7,8 @@ import {Menu, Icon} from 'antd'
 class CustomMenu extends React.Component {
   state = {
     openKeys: [],
-    selectedKeys: []
+    selectedKeys: [],
+    openKeysForCollapsed: [],
   }
 
   componentDidMount() {
@@ -70,7 +71,7 @@ class CustomMenu extends React.Component {
     }
   }
 
-  renderMenuItem = ({key, icon, title,}) => {
+    renderMenuItem = ({key, icon, title,}) => {
     return (
       <Menu.Item key={key}>
         <Link to={key}>
@@ -93,12 +94,12 @@ class CustomMenu extends React.Component {
   }
 
   render() {
-    const {openKeys, selectedKeys} = this.state
+    const {openKeys, selectedKeys,openKeysForCollapsed} = this.state
     return (
       <Menu
         onOpenChange={this.onOpenChange}
         onClick={({key}) => this.setState({selectedKeys: [key]})}
-        openKeys={openKeys}
+        openKeys={openKeys}  //openKeys在隐藏侧面导航时会有问题
         selectedKeys={selectedKeys}
         theme={this.props.theme ? this.props.theme : 'dark'}
         mode='inline'>
