@@ -11,7 +11,7 @@ const menus = [
     title: '基本组件',
     icon: 'laptop',
     key: '/home/general',
-    subs: [
+    children: [
       {key: '/home/general/button', title: '按钮', icon: '',},
       {key: '/home/general/icon', title: '图标', icon: '',},
     ]
@@ -20,7 +20,7 @@ const menus = [
     title: '导航组件',
     icon: 'bars',
     key: '/home/navigation',
-    subs: [
+    children: [
       {key: '/home/navigation/dropdown', title: '下拉菜单', icon: ''},
       {key: '/home/navigation/menu', title: '导航菜单', icon: ''},
       {key: '/home/navigation/steps', title: '步骤条', icon: ''},
@@ -30,12 +30,12 @@ const menus = [
     title: '输入组件',
     icon: 'edit',
     key: '/home/entry',
-    subs: [
+    children: [
       {
         key: '/home/entry/form',
         title: '表单',
         icon: '',
-        subs: [
+        children: [
           {key: '/home/entry/form/basic-form', title: '基础表单', icon: ''},
           {key: '/home/entry/form/step-form', title: '分步表单', icon: ''}
         ]
@@ -47,7 +47,7 @@ const menus = [
     title: '显示组件',
     icon: 'desktop',
     key: '/home/display',
-    subs: [
+    children: [
       {key: '/home/display/carousel', title: '轮播图', icon: ''},
       {key: '/home/display/collapse', title: '折叠面板', icon: ''},
       {key: '/home/display/list', title: '列表', icon: ''},
@@ -59,7 +59,7 @@ const menus = [
     title: '反馈组件',
     icon: 'message',
     key: '/home/feedback',
-    subs: [
+    children: [
       {key: '/home/feedback/modal', title: '对话框', icon: '',},
       {key: '/home/feedback/notification', title: '通知提醒框', icon: ''},
       {key: '/home/feedback/spin', title: '加载中', icon: '',}
@@ -69,7 +69,7 @@ const menus = [
     title: '其它',
     icon: 'bulb',
     key: '/home/other',
-    subs:[
+    children:[
       {key: '/home/other/animation', title: '动画', icon: '',},
       {key: '/home/other/gallery', title: '画廊', icon: '',},
       {key:'/home/other/draft',title:'富文本',icon:''},

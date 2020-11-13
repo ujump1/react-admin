@@ -8,7 +8,8 @@ class CustomMenu extends React.Component {
   state = {
     openKeys: [],
     selectedKeys: [],
-    openKeysForCollapsed: [],
+    EmptyOpenKeys: [],    // 空的展开菜单
+    useEmptyOpenKeys:false,  // 是否使用空的的展开菜单
   }
 
   componentDidMount() {
@@ -44,9 +45,29 @@ class CustomMenu extends React.Component {
         selectedKeys: [pathname],
       })
     }
+    // 侧面导航栏收缩的时候使用空的展开菜单
+    if(nextProps.collapsed){
+      this.setState({
+        useEmptyOpenKeys:true
+      })
+    }else { // 侧面导航栏展开时候不使用空的展开菜单
+      this.setState({
+        useEmptyOpenKeys:false
+      })
+    }
   }
 
   onOpenChange = (openKeys) => {
+
+    // 点击菜单的时候不使用空的展开菜单
+    this.setState({
+      useEmptyOpenKeys:false
+    })
+    // /***************可以打开多个父菜单*******************/
+    // this.setState({
+    //   openKeys
+    // })
+    /****如果只允许打开一个菜单的话,就用下面的****/
     //此函数的作用只展开当前父级菜单（父级菜单下可能还有子菜单）
     if (openKeys.length === 0 || openKeys.length === 1) {
       this.setState({
@@ -74,19 +95,19 @@ class CustomMenu extends React.Component {
     renderMenuItem = ({key, icon, title,}) => {
     return (
       <Menu.Item key={key}>
-        <Link to={key}>
+        <Link to={key} >
           {icon && <Icon type={icon}/>}
           <span>{title}</span>
         </Link>
       </Menu.Item>
     )
   }
-  renderSubMenu = ({key, icon, title, subs}) => {
+  renderSubMenu = ({key, icon, title, children}) => {
     return (
       <Menu.SubMenu key={key} title={<span>{icon && <Icon type={icon}/>}<span>{title}</span></span>}>
         {
-          subs && subs.map(item => {
-            return item.subs && item.subs.length > 0 ? this.renderSubMenu(item) : this.renderMenuItem(item)
+          children && children.map(item => {
+            return item.children && item.children.length > 0 ? this.renderSubMenu(item) : this.renderMenuItem(item)
           })
         }
       </Menu.SubMenu>
@@ -94,18 +115,18 @@ class CustomMenu extends React.Component {
   }
 
   render() {
-    const {openKeys, selectedKeys,openKeysForCollapsed} = this.state
+    const {openKeys, selectedKeys,openKeysForCollapsed} = this.state;
     return (
       <Menu
-        onOpenChange={this.onOpenChange}
-        onClick={({key}) => this.setState({selectedKeys: [key]})}
-        openKeys={openKeys}  //openKeys在隐藏侧面导航时会有问题
-        selectedKeys={selectedKeys}
-        theme={this.props.theme ? this.props.theme : 'dark'}
-        mode='inline'>
+          onOpenChange={this.onOpenChange}
+          onClick={({key}) => this.setState({selectedKeys: [key]})}
+          openKeys={this.state.useEmptyOpenKeys ? this.state.EmptyOpenKeys:this.state.openKeys}
+          selectedKeys={selectedKeys}
+          theme={this.props.theme ? this.props.theme : 'dark'}
+          mode='inline'>
         {
           this.props.menus && this.props.menus.map(item => {
-            return item.subs && item.subs.length > 0 ? this.renderSubMenu(item) : this.renderMenuItem(item)
+            return item.children && item.children.length > 0 ? this.renderSubMenu(item) : this.renderMenuItem(item)
           })
         }
       </Menu>
