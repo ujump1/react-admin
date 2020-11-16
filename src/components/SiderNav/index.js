@@ -91,7 +91,7 @@ class SiderNav extends React.Component {
   render() {
 
     return (
-      <div style={{height: '100vh',overflowY:'scroll'}}>
+      <div style={{height: '100vh'}}>
         <div style={styles.logo}></div>
         <CustomMenu menus={menus} collapsed={this.props.collapsed}/>
       </div>

@@ -90,6 +90,7 @@ class CustomMenu extends React.Component {
         openKeys: [latestOpenKey]
       })
     }
+    console.log(this.state.openKeys)
   }
 
     renderMenuItem = ({key, icon, title,}) => {
@@ -115,12 +116,12 @@ class CustomMenu extends React.Component {
   }
 
   render() {
-    const {openKeys, selectedKeys,openKeysForCollapsed} = this.state;
+    const {openKeys, selectedKeys} = this.state;
     return (
       <Menu
           onOpenChange={this.onOpenChange}
           onClick={({key}) => this.setState({selectedKeys: [key]})}
-          openKeys={this.state.useEmptyOpenKeys ? this.state.EmptyOpenKeys:this.state.openKeys}
+          openKeys={this.state.useEmptyOpenKeys ? this.state.EmptyOpenKeys:openKeys}
           selectedKeys={selectedKeys}
           theme={this.props.theme ? this.props.theme : 'dark'}
           mode='inline'>
