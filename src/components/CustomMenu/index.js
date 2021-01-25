@@ -54,8 +54,8 @@ class CustomMenu extends React.Component {
       this.setState({
         useEmptyOpenKeys:false
       })
-      //获取当前所在的目录层级
       //根据path得出openKeys，因为收缩的时候openKeys为空
+      //获取当前所在的目录层级
       const rank = pathname.split('/')
       switch (rank.length) {
         case 2 :  //一级目录
@@ -85,7 +85,7 @@ class CustomMenu extends React.Component {
     this.setState({
       useEmptyOpenKeys:false
     })
-    // /***************可以打开多个父菜单*******************/
+    // /***************可以打开多个父菜单，暂时不允许，可能会有问题*******************/
     // this.setState({
     //   openKeys
     // })
