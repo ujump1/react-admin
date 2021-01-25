@@ -54,7 +54,29 @@ class CustomMenu extends React.Component {
       this.setState({
         useEmptyOpenKeys:false
       })
+      //获取当前所在的目录层级
+      //根据path得出openKeys，因为收缩的时候openKeys为空
+      const rank = pathname.split('/')
+      switch (rank.length) {
+        case 2 :  //一级目录
+          this.setState({
+            selectedKeys: [pathname]
+          })
+          break;
+        case 5 : //三级目录，要展开两个subMenu
+          this.setState({
+            selectedKeys: [pathname],
+            openKeys: [rank.slice(0, 3).join('/'), rank.slice(0, 4).join('/')]
+          })
+          break;
+        default :
+          this.setState({
+            selectedKeys: [pathname],
+            openKeys: [pathname.substr(0, pathname.lastIndexOf('/'))]
+          })
+      }
     }
+    console.log(this.state.useEmptyOpenKeys)
   }
 
   onOpenChange = (openKeys) => {
@@ -91,6 +113,7 @@ class CustomMenu extends React.Component {
       })
     }
     console.log(this.state.openKeys)
+    console.log(this.state.selectedKeys)
   }
 
     renderMenuItem = ({key, icon, title,}) => {
